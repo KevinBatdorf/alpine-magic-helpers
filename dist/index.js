@@ -245,13 +245,13 @@
       }
     };
 
-    var alpine$9 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$a = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineComponentMagicMethod.start();
-      alpine$9(callback);
+      alpine$a(callback);
     };
 
     var bind = function bind(fn, thisArg) {
@@ -1754,13 +1754,13 @@
       }
     };
 
-    var alpine$8 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$9 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineFetchMagicMethod.start();
-      alpine$8(callback);
+      alpine$9(callback);
     };
 
     importOrderCheck();
@@ -1818,13 +1818,13 @@
       }
     };
 
-    var alpine$7 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$8 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineIntervalMagicMethod.start();
-      alpine$7(callback);
+      alpine$8(callback);
     };
 
     importOrderCheck();
@@ -1864,13 +1864,13 @@
       }
     };
 
-    var alpine$6 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$7 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineRangeMagicMethod.start();
-      alpine$6(callback);
+      alpine$7(callback);
     };
 
     importOrderCheck();
@@ -1893,13 +1893,13 @@
       }
     };
 
-    var alpine$5 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$6 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineRefreshMagicMethod.start();
-      alpine$5(callback);
+      alpine$6(callback);
     };
 
     var Config = /*#__PURE__*/function () {
@@ -1987,13 +1987,13 @@
       }
     };
 
-    var alpine$4 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$5 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineScreenMagicMethod.start();
-      alpine$4(callback);
+      alpine$5(callback);
     };
 
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -2494,13 +2494,13 @@
       }
     };
 
-    var alpine$3 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$4 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineScrollMagicMethod.start();
-      alpine$3(callback);
+      alpine$4(callback);
     };
 
     importOrderCheck();
@@ -2553,13 +2553,13 @@
       }
     };
 
-    var alpine$2 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$3 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
       AlpineTruncateMagicMethod.start();
-      alpine$2(callback);
+      alpine$3(callback);
     };
 
     var deepDiff = createCommonjsModule(function (module, exports) {
@@ -3167,17 +3167,17 @@
       }
     };
 
-    var alpine$1 = window.deferLoadingAlpine || function (alpine) {
+    var alpine$2 = window.deferLoadingAlpine || function (alpine) {
       return alpine();
     };
 
     window.deferLoadingAlpine = function (callback) {
-      alpine$1(callback);
+      alpine$2(callback);
       AlpineUndoMagicMethod.start();
     };
 
     importOrderCheck();
-    var DIRECTIVE = 'unsafe-html';
+    var DIRECTIVE$1 = 'unsafe-html';
 
     var nodeScriptClone = function nodeScriptClone(node) {
       var script = document.createElement('script');
@@ -3219,9 +3219,231 @@
               var type = _ref.type,
                   expression = _ref.expression;
 
-              if (type === DIRECTIVE) {
+              if (type === DIRECTIVE$1) {
                 el.innerHTML = component.evaluateReturnExpression(el, expression, extraVars);
                 nodeScriptReplace(el);
+              }
+            });
+            return legacyResolveBoundAttributes.bind(component)(el, initialUpdate, extraVars);
+          };
+        });
+      }
+    };
+
+    var alpine$1 = window.deferLoadingAlpine || function (alpine) {
+      return alpine();
+    };
+
+    window.deferLoadingAlpine = function (callback) {
+      AlpineUnsafeHTMLCustomDirective.start();
+      alpine$1(callback);
+    };
+
+    var DIRECTIVE = 'validate';
+    var EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var validator = {
+      tests: {
+        required: function required(value) {
+          return value !== '';
+        },
+        email: function email(value) {
+          return value === '' || EMAIL_REGEX.test(value);
+        },
+        minlength: function minlength(value, length) {
+          return value === '' || value.length >= parseInt(length);
+        },
+        maxlength: function maxlength(value, length) {
+          return value === '' || value.length <= parseInt(length);
+        },
+        numeric: function numeric(value) {
+          return value === '' || !isNaN(parseFloat(value)) && isFinite(value);
+        },
+        integer: function integer(value) {
+          return value === '' || !isNaN(value) && !isNaN(parseInt(value, 10)) && Math.floor(value) == value;
+        },
+        // eslint-disable-line eqeqeq
+        min: function min(value, _min) {
+          return value === '' || parseFloat(value) >= parseFloat(_min);
+        },
+        max: function max(value, _max) {
+          return value === '' || parseFloat(value) <= parseFloat(_max);
+        },
+        pattern: function pattern(value, _pattern) {
+          return value === '' || new RegExp(_pattern).test(value);
+        },
+        equals: function equals(value, otherValue) {
+          return value === '' || value === otherValue;
+        },
+        minoptions: function minoptions(value, min) {
+          return value === '' || Array.isArray(value) && value.length >= parseFloat(min);
+        },
+        maxoptions: function maxoptions(value, max) {
+          return value === '' || Array.isArray(value) && value.length <= parseFloat(max);
+        }
+      },
+      is: function is(value, rules) {
+        if (rules === void 0) {
+          rules = [];
+        }
+
+        for (var index in rules) {
+          var rule = rules[index].split(':');
+          var test = this.tests[rule[0]] || window.AlpineValidationRules[rule[0]];
+
+          if (!test) {
+            throw Error('Invalid rule in validator: ' + rule[0]);
+          }
+
+          var result = test.apply(this, [value, rule[1]]);
+          if (!result) return rules[index];
+        }
+
+        return true;
+      }
+    };
+    var AlpineValidateCustomDirective = {
+      start: function start() {
+        checkForAlpine();
+        Alpine.addMagicProperty('invalid', function ($el) {
+          return function (target, errorType) {
+            if (errorType === void 0) {
+              errorType = '';
+            }
+
+            var originalTarget = target; // Support for CSS query selector
+
+            if (typeof target === 'string') {
+              target = document.querySelector(target);
+            }
+
+            if (!(target instanceof Element)) {
+              throw Error('Unsupported $invalid target: ', originalTarget);
+            }
+
+            if (target.$dirty !== true) {
+              return false;
+            } // Note Alpine has a bug end it strips all backslashes breaking regular expresions
+
+
+            return errorType === '' ? target.$valid !== true : // Note Alpine has a bug end it strips all backslashes breaking regular expresions
+            typeof target.$valid === 'string' ? target.$valid.replace(/\\/g, '') === errorType : target.$valid === errorType;
+          };
+        });
+        Alpine.onBeforeComponentInitialized(function (component) {
+          var legacyResolveBoundAttributes = component.resolveBoundAttributes;
+
+          component.resolveBoundAttributes = function (el, initialUpdate, extraVars) {
+            if (initialUpdate === void 0) {
+              initialUpdate = false;
+            }
+
+            var attrs = getXDirectives(el);
+            attrs.forEach(function (_ref) {
+              var type = _ref.type,
+                  modifiers = _ref.modifiers,
+                  expression = _ref.expression;
+
+              if (type === DIRECTIVE && initialUpdate) {
+                var firstValidationOnInput = modifiers.includes('immediate');
+
+                var validate = function validate() {
+                  // Evaluate the rules in case they are dynamic
+                  // Note Alpine has a bug end it strips all backslashes breaking regular expresions
+                  var rules = component.evaluateReturnExpression(el, expression.replace(/\\/g, '\\\\'), extraVars);
+
+                  if (!Array.isArray(rules)) {
+                    throw Error('x-validate must contain an array of validation rules');
+                  }
+
+                  var value = el.form.elements[el.name].value;
+
+                  if (el.type.toLowerCase() === 'checkbox' && !el.checked) {
+                    value = '';
+                  }
+
+                  if (el.type.toLowerCase() !== 'radio' && el.form.elements[el.name] instanceof NodeList) {
+                    value = Array.from(el.form.elements[el.name]).reduce(function (acc, curr) {
+                      if (curr.checked) {
+                        acc.push(curr.value);
+                      }
+
+                      return acc;
+                    }, []);
+
+                    if (value.length === 0 || value.length === 1 && value[0] === '') {
+                      value = '';
+                    }
+                  }
+
+                  if (el.type.toLowerCase() === 'select-multiple') {
+                    value = Array.apply(void 0, el.options).reduce(function (acc, option) {
+                      if (option.selected === true) {
+                        acc.push(option.value);
+                      }
+
+                      return acc;
+                    }, []);
+
+                    if (value.length === 0 || value.length === 1 && value[0] === '') {
+                      value = '';
+                    }
+                  } // Run validation
+
+
+                  var validationRes = validator.is(value, rules); // Set validity state
+
+                  el.setCustomValidity(validationRes === true ? '' : validationRes);
+                  return validationRes;
+                }; // If the element is a radio button, add listeners on each input
+
+
+                var elements = el.form.elements[el.name];
+                if (!(elements instanceof NodeList)) elements = [elements];
+                elements.forEach(function (element) {
+                  // Prevent the default behaviour on invalid to hide the native tooltips
+                  // If the element wasn't flagged as validated, flag it and update the component
+                  // to show possible errors
+                  el.addEventListener('invalid', function (e) {
+                    if (el.$dirty !== true) {
+                      el.$dirty = true;
+                      component.updateElements(component.$el);
+                    }
+
+                    e.preventDefault();
+                  });
+                  element.addEventListener('input', function (e) {
+                    // If immadiate validation, flag the element as validated
+                    if (firstValidationOnInput) {
+                      el.$dirty = true;
+                    }
+
+                    var prevValue = el.$valid;
+                    el.$valid = validate(); // If validated and the validation result has changes, refresh the component
+
+                    if (el.$dirty && el.$valid !== prevValue) {
+                      component.updateElements(component.$el);
+                    }
+                  }); // If not immediate validation, flag the element as validated on blur
+                  // and refresh the component
+
+                  if (!firstValidationOnInput) {
+                    var eventName = 'focusout';
+
+                    if (['radio', 'checkbox', 'select-one', 'select-multiple'].includes(element.type.toLowerCase())) {
+                      eventName = 'change';
+                    }
+
+                    element.addEventListener(eventName, function (e) {
+                      if (el.$dirty !== true) {
+                        el.$dirty = true;
+                        component.updateElements(component.$el);
+                      }
+                    });
+                  }
+                }); // Trigger initial validation to mimic native HTML5 behaviour
+                // and prevent form from being submitted straight away
+
+                el.$valid = validate();
               }
             });
             return legacyResolveBoundAttributes.bind(component)(el, initialUpdate, extraVars);
@@ -3235,9 +3457,11 @@
     };
 
     window.deferLoadingAlpine = function (callback) {
-      AlpineUnsafeHTMLCustomDirective.start();
+      AlpineValidateCustomDirective.start();
       alpine(callback);
     };
+
+    window.AlpineValidationRules = [];
 
     var index = {
       AlpineComponentMagicMethod: AlpineComponentMagicMethod,
@@ -3249,7 +3473,8 @@
       AlpineScrollMagicMethod: AlpineScrollMagicMethod,
       AlpineTruncateMagicMethod: AlpineTruncateMagicMethod,
       AlpineUndoMagicMethod: AlpineUndoMagicMethod,
-      AlpineUnsafeHTMLCustomDirective: AlpineUnsafeHTMLCustomDirective
+      AlpineUnsafeHTMLCustomDirective: AlpineUnsafeHTMLCustomDirective,
+      AlpineValidateCustomDirective: AlpineValidateCustomDirective
     };
 
     return index;
